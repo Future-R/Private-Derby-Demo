@@ -207,10 +207,13 @@ export class RaceSimulation {
           name: "PanicActive",
           duration: -1, // Managed internally
           onTick: (h, dt) => {
-              // Exit probability formula from C#
-              const prob = (Math.cos(Math.PI * remainingTime / 12) + 1) / 2;
+              // Formula: ((Cos(pi * t / 12) + 1) / 2) * dt
+              // Multiply by dt to treat it as probability per second (since tick is high frequency)
+              // This prevents instant exit.
+              const probDensity = (Math.cos(Math.PI * remainingTime / 12) + 1) / 2;
+              const prob = probDensity * dt; 
               
-              if (Math.random() <= prob) {
+              if (Math.random() <= prob || remainingTime <= 0) {
                   // Exit Panic
                   h.isPanic = false;
                   h.strategyAwareness = originalAwareness;
@@ -220,7 +223,6 @@ export class RaceSimulation {
               }
 
               remainingTime -= dt;
-              if (remainingTime < 0) remainingTime = 0;
           }
       });
   }
