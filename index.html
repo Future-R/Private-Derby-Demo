@@ -20,12 +20,26 @@
           scrollbar-width: none;
       }
     </style>
+    <!-- Inline Error Handler: Runs before any module to catch loading errors -->
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        var root = document.getElementById('root');
+        if (root) {
+          root.innerHTML = '<div style="padding: 20px; color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; margin: 20px; font-family: sans-serif; z-index: 9999; position: relative;">' +
+            '<h3 style="margin-top:0">启动错误 / Startup Error</h3>' +
+            '<p><strong>Message:</strong> ' + message + '</p>' +
+            '<p><strong>Source:</strong> ' + source + ':' + lineno + '</p>' +
+            '<p>This error occurred before the app could start. Check the browser console (F12) for more details.</p>' +
+            '</div>';
+        }
+      };
+    </script>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
     "vite": "https://esm.sh/vite@^7.3.0",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
@@ -34,7 +48,13 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: #666;">
+        <div style="margin-bottom: 10px;">正在加载资源 / Loading Game Resources...</div>
+        <div style="font-size: 12px; color: #999;">If this message persists, the script failed to load.</div>
+      </div>
+    </div>
+    <script type="module" src="./index.tsx"></script>
   <script type="module" src="/index.tsx"></script>
 </body>
 </html>
