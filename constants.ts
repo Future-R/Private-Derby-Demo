@@ -1,4 +1,4 @@
-import { HorseConfig, RaceConfig, SurfaceType, RunStyle, Motivation, Condition } from './types';
+import { HorseConfig, RaceConfig, SurfaceType, RunStyle, Motivation, Condition, StrategyData } from './types';
 
 // 杂项表
 export const FRAME_TIME = 0.05;
@@ -61,12 +61,14 @@ export const RACES_DATA: RaceConfig[] = [
 ];
 
 // 跑法配置
-export const STRATEGY_DATA = {
+export const STRATEGY_DATA: Record<RunStyle, StrategyData> = {
   [RunStyle.GreatEscape]: { initialLaneSpeed: 0.03, startTarget: 1.063, midTarget: 0.962, endTarget: 0.95, startAccel: 1.17, midAccel: 0.94, endAccel: 0.956, staminaCoef: 0.86, posMin: 0, posMax: 0 },
   [RunStyle.Escape]: { initialLaneSpeed: 0.02, startTarget: 1.003, midTarget: 0.98, endTarget: 0.962, startAccel: 1.07, midAccel: 1.0, endAccel: 0.996, staminaCoef: 0.95, posMin: 0, posMax: 0 },
   [RunStyle.Leader]: { initialLaneSpeed: 0.01, startTarget: 0.978, midTarget: 0.991, endTarget: 0.975, startAccel: 0.985, midAccel: 1.0, endAccel: 0.996, staminaCoef: 0.89, posMin: 2.5, posMax: 5 },
   [RunStyle.Betweener]: { initialLaneSpeed: 0.01, startTarget: 0.938, midTarget: 0.998, endTarget: 0.994, startAccel: 0.975, midAccel: 1.0, endAccel: 1.0, staminaCoef: 1.0, posMin: 6.5, posMax: 7 },
   [RunStyle.Chaser]: { initialLaneSpeed: 0.03, startTarget: 0.931, midTarget: 1.0, endTarget: 1.0, startAccel: 0.945, midAccel: 1.0, endAccel: 0.997, staminaCoef: 0.995, posMin: 7.5, posMax: 8 },
+  // Add Fallback for Unknown
+  [RunStyle.Unknown]: { initialLaneSpeed: 0.01, startTarget: 1.0, midTarget: 1.0, endTarget: 1.0, startAccel: 1.0, midAccel: 1.0, endAccel: 1.0, staminaCoef: 1.0, posMin: 5, posMax: 5 },
 };
 
 // 适应性修正

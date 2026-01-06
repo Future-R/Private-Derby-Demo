@@ -69,6 +69,19 @@ export interface RaceConfig {
   attributes?: string; // e.g. "意志;耐力"
 }
 
+export interface StrategyData {
+  initialLaneSpeed: number;
+  startTarget: number;
+  midTarget: number;
+  endTarget: number;
+  startAccel: number;
+  midAccel: number;
+  endAccel: number;
+  staminaCoef: number;
+  posMin: number;
+  posMax: number;
+}
+
 export interface RuntimeHorse {
   config: HorseConfig;
   currentSpeed: Attribute;
