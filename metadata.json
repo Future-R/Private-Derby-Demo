@@ -1,0 +1,5 @@
+{
+  "name": "私密马赛 (Private Derby)",
+  "description": "基于严谨逻辑的赛马模拟器。包含完整的属性、适性、跑法及比赛策略模拟。",
+  "requestFramePermissions": []
+}
